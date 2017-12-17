@@ -8,10 +8,12 @@ import (
 type RGBLED interface {
 	LinuxLED
 	SetColor(color.Color) error
+	GetColor() color.Color
 }
 
 type rgbled struct {
 	red, green, blue, global *linuxled
+	color color.Color
 
 	trigger Trigger
 }
@@ -135,5 +137,11 @@ func (rgb *rgbled) SetColor(c color.Color) error {
 		return fmt.Errorf("Failed")
 	}
 
+	rgb.color = c
+
 	return nil
+}
+
+func (rgb *rgbled) GetColor() color.Color {
+	return rgb.color
 }
