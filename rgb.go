@@ -118,6 +118,10 @@ func (rgb *rgbled) GetTrigger() Trigger {
 }
 
 func (rgb *rgbled) SetColor(c color.Color) error {
+	if c == rgb.color {
+		return nil
+	}
+
 	r, g, b, a := c.RGBA()
 	if a != 0 && a != 0xffff {
 		r = (r << 16) / a
