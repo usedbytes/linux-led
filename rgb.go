@@ -137,6 +137,10 @@ func (rgb *rgbled) SetColor(c color.Color) error {
 	err2 := rgb.green.SetBrightness(gf)
 	err3 := rgb.blue.SetBrightness(bf)
 
+	if rgb.global != nil {
+		return rgb.global.SetBrightness(1.0)
+	}
+
 	if err1 != nil || err2 != nil || err3 != nil {
 		return fmt.Errorf("Failed")
 	}
